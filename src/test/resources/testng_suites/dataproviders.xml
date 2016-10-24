@@ -1,0 +1,33 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite verbose="1" name="Carina Demo Tests - Dataproviders sample tests"
+	skipfailedinvocationcounts="false" junit="false" parallel="tests"
+	data-provider-thread-count="50" annotations="JDK">
+
+	<test name="Login page test">
+		<classes>
+			<class name="com.qaprosoft.automation.tests.DataprovidesSampleTest">
+				<methods>
+					<include name="testLoginPage" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+
+	<test name="Select car model test">
+		<parameter name="brand" value="Audi" />
+		<parameter name="model" value="80" />
+		<parameter name="yearFrom" value="1989" />
+		<parameter name="yearTo" value="1991" />
+		<parameter name="priceFrom" value="500" />
+		<parameter name="priceTo" value="1000" />
+		<classes>
+			<class name="com.qaprosoft.automation.tests.DataprovidesSampleTest">
+				<methods>
+					<include name="testTabsFiller" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+
+</suite>
