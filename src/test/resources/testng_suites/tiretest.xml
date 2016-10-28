@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite verbose="1" name="Carina Demo Tests - Dataproviders sample tests"
+	skipfailedinvocationcounts="false" junit="false" parallel="tests"
+	data-provider-thread-count="1" annotations="JDK">
+
+	<test name="Tire Test">
+		<classes>
+			<class name="com.qaprosoft.automation.tests.TireTest">
+				<methods>
+					<include name="testTires" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+
+</suite>

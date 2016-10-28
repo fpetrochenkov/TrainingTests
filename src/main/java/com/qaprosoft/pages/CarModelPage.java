@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
 
-public class CarModelPage extends AbstractPage {
+public class CarModelPage extends AbstractPage {	
 	@FindBy(xpath = "//div[@class='brands']//a/span")
 	private List<ExtendedWebElement> modelLinks;
 

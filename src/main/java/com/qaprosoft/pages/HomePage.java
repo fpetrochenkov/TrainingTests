@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import com.qaprosoft.carina.core.foundation.utils.R;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
-import com.qaprosoft.pagecomponents.NavigationMenu;
+import com.qaprosoft.components.NavigationMenu;
 
 public class HomePage extends AbstractPage {
 
