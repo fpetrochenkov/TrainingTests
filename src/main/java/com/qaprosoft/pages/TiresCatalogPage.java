@@ -1,13 +1,12 @@
 package com.qaprosoft.pages;
 
+
 import java.util.ArrayList;
 import java.util.List;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
-import com.qaprosoft.models.Tire;
 
 public class TiresCatalogPage extends AbstractPage {
 	
@@ -20,18 +19,37 @@ public class TiresCatalogPage extends AbstractPage {
 	@FindBy(xpath = "//div[@class='tyre-listing-price']/h5")
 	private List<ExtendedWebElement> tireCosts;
 	
-	@FindBy(xpath = "//ul[@class='breadcrumbs-list js-breadcrumbs-list setanim']/li[4]//span")
-	private ExtendedWebElement tireDiameter;
+	@FindBy(xpath = "//div[@class='b-subnav']//li/a")
+	private List<ExtendedWebElement> tireDiameters;	
 	
-	@FindBy(xpath = "//ul[@class='breadcrumbs-list js-breadcrumbs-list setanim']/li[5]//span")
-	private ExtendedWebElement tireParams;
-	
-	@FindBy(xpath = "//div[@class='tyre-listing-about']//p")
+	@FindBy(xpath = "//div[@class='b-subnav']//li/a")
 	private List<ExtendedWebElement> tireTypes;
 	
-	@FindBy(xpath = "//ul[@class='breadcrumbs-list js-breadcrumbs-list setanim']/li[2]//span")
-	private ExtendedWebElement tireCarType;
-
+	@FindBy(xpath = "//div[@class='b-subnav']//li/a")
+	private List<ExtendedWebElement> tireWidthes;
+	
+	@FindBy(xpath = "//div[@class='b-subnav']//li/a")
+	private List<ExtendedWebElement> tireHeights;
+	
+	
+	
+	
+	
+	@FindBy(xpath = "/html/body/div[3]/div[1]/main/div/div[1]/div[1]/div/div/ul/li[2]/a/span")
+	private ExtendedWebElement carType;
+	
+	@FindBy(xpath = "/html/body/div[3]/div[1]/main/div/div[1]/div[1]/div/div/ul/li[3]/a/span")
+	private ExtendedWebElement type;
+	
+	@FindBy(xpath = "/html/body/div[3]/div[1]/main/div/div[1]/div[1]/div/div/ul/li[4]/a/span")
+	private ExtendedWebElement diameter;
+	
+	@FindBy(xpath = "/html/body/div[3]/div[1]/main/div/div[1]/div[1]/div/div/ul/li[5]/span")
+	private ExtendedWebElement width_height;
+	
+	
+	
+	
 	public TiresCatalogPage(WebDriver driver) {
 		super(driver);
 	}
@@ -46,43 +64,64 @@ public class TiresCatalogPage extends AbstractPage {
 		}
 	}
 	
-	public List<ExtendedWebElement> getTireTitles() {
-		return tireTitles;
+	public void fillTire(String diameter, String type, String width, String height) {
+		for(ExtendedWebElement tireDiameter: tireDiameters) {
+			if(tireDiameter.getText().equalsIgnoreCase(diameter)) {	
+				tireDiameter.click();
+			}
+		}
+		for(ExtendedWebElement tireType: tireTypes) {
+			if(tireType.getText().equalsIgnoreCase(type)) {
+				click(tireType);
+			}
+		}
+		for(ExtendedWebElement tireWidth: tireWidthes) {
+			if(tireWidth.getText().equalsIgnoreCase(width)) {
+				click(tireWidth);
+			}
+		}
+		for(ExtendedWebElement tireHeight: tireHeights) {
+			if(tireHeight.getText().equalsIgnoreCase(height)) {
+				click(tireHeight);
+				break;
+			}
+		}
 	}
 	
-	public List<ExtendedWebElement> getTireCosts() {
-		return tireCosts;
+	public List<String> getTireTitles() {
+		List<String> list = new ArrayList<>();
+		for(ExtendedWebElement tireTitle: tireTitles) {			
+			list.add(tireTitle.getText());
+		}
+		return list;
 	}
 	
-	public ExtendedWebElement getTireDiameter() {
-		return tireDiameter;
+	public List<String> getTirePrices() {
+		List<String> list = new ArrayList<>();
+		for(ExtendedWebElement tireCost: tireCosts) {			
+			list.add(tireCost.getText());
+		}
+		return list;
 	}
 	
-	public ExtendedWebElement getTireParams() {
-		return tireParams;
+	public String getType() {
+		return type.getText();
 	}
 	
-	public List<ExtendedWebElement> getTireTypes() {
-		return tireTypes;
+	public String getDiameter() {
+		return diameter.getText().substring(0);
 	}
 	
-	public ExtendedWebElement getTireCarType() {
-		return tireCarType;
+	public String getWidth() {
+		return width_height.getText().substring(0, 3);
 	}
 	
+	public String getHeight() {
+		return width_height.getText().substring(4);
+	}
 	
-//	public List<Tire> fillList() {
-//		List<Tire> tires = new ArrayList<>();
-//		for(int i = 0; i<tireTitles.size(); i++) {
-//			Tire tire = new Tire();
-//			tire.setName(tireTitles.get(i).getText());
-//			tire.setPrice(tireCosts.get(i).getText());
-//			tire.setType(tireTypes.get(i).getText());
-//			tire.setCarType(tireCarType.getText());
-//			tire.setDiameter(tireDiameter.getText());
-//			tire.setParams(tireParams.getText());
-//		}
-//		return tires;
-//	}
-
+	public String getCarType() {
+		return carType.getText();
+	}
+	
 }

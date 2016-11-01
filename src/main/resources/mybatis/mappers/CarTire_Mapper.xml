@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mappers">
+
+	<resultMap id="CarTireResultMap" type="CarTire">
+		<result column="name" property="name" />
+		<result column="price" property="price" />
+		<result column="diameter" property="diameter" />
+		<result column="width" property="width" />
+		<result column="height" property="height" />
+		<result column="type" property="type" />
+	</resultMap>
+
+	<select id="getAllCarTires" resultMap="CarTireResultMap">
+		select name, diameter,
+		width, height, type, price, car_type from tires
+		inner join car_type where car_type_id = 1
+	</select>
+
+	<insert id="insertCarTire" parameterType="CarTire">
+		INSERT IGNORE INTO
+		tires
+		(name, price, diameter,
+		width, height, type, car_type_id) VALUES
+		(#{name}, #{price}, #{diameter}, #{width}, #{height}, #{type}, 1)
+	</insert>
+
+	<insert id="insertCarType">
+		INSERT IGNORE INTO car_type (id, car_type) VALUES (1, #{car_type})
+	</insert>
+
+</mapper>

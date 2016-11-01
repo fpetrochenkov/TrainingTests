@@ -18,7 +18,7 @@ private static final Logger LOG = LogManager.getRootLogger();
 	private SqlSessionFactory sqlSessionFactory;
 	
 	private SessionFactory(){
-		String resource = "config.xml";
+		String resource = "mybatis/config.xml";
 		InputStream inputStream;
 		try {
 			inputStream = Resources.getResourceAsStream(resource);

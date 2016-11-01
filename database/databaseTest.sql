@@ -15,17 +15,34 @@ CREATE SCHEMA IF NOT EXISTS `databaseTest` DEFAULT CHARACTER SET utf8 ;
 USE `databaseTest` ;
 
 -- -----------------------------------------------------
+-- Table `databaseTest`.`car_type`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `databaseTest`.`car_type` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `car_type` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `databaseTest`.`tires`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `databaseTest`.`tires` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `tires_name` VARCHAR(45) NOT NULL,
+  `name` VARCHAR(45) NOT NULL,
   `diameter` VARCHAR(45) NOT NULL,
-  `width/height` VARCHAR(45) NOT NULL,
-  `carType` VARCHAR(45) NOT NULL,
+  `width` VARCHAR(45) NOT NULL,
+  `height` VARCHAR(45) NOT NULL,
   `type` VARCHAR(45) NOT NULL,
   `price` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`))
+  `car_type_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_tires_car_type_idx` (`car_type_id` ASC),
+  CONSTRAINT `fk_tires_car_type`
+    FOREIGN KEY (`car_type_id`)
+    REFERENCES `databaseTest`.`car_type` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 

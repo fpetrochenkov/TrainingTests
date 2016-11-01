@@ -29,49 +29,25 @@ public class TabsFiller extends AbstractUIObject {
 	@FindBy(xpath = ".//dt[@class='tabsfilter-type js-tabsfilter-type'][contains(text(),'Грузовые')]")
 	private ExtendedWebElement freight;
 
-	@FindBy(name = "tires_width")
-	private List<ExtendedWebElement> widthsTires;
+	// @FindBy(xpath = "//*[@id='tires-car-filter-form']/div/div[1]/select")
+	// private ExtendedWebElement width;
 
-	@FindBy(name = "tires_height")
-	private List<ExtendedWebElement> heightsTires;
-
-	@FindBy(name = "landing_diameter")
-	private List<ExtendedWebElement> diametersTires;
-
-	@FindBy(xpath = ".//div[@class='av-radiogroup']/label/span/i")
-	private List<ExtendedWebElement> types;
+	// @FindBy(linkText = "Высота")
+	// private ExtendedWebElement height;
+	//
+	// @FindBy(linkText = "Диаметр")
+	// private ExtendedWebElement diameter;
 
 	@FindBy(xpath = "//button[@class='button button-primary button-block js-submit-car-filter']")
-	private ExtendedWebElement searchButton;
+	private ExtendedWebElement search;
 
-	public TiresCatalogPage selectTires(int width,int height, int diameter, String carType, String type) {
-		List<ExtendedWebElement> carTypes = new ArrayList<>();
-		carTypes.add(car);
-		carTypes.add(tyre);
-		carTypes.add(offRoad);
-		carTypes.add(freight);
-		for (ExtendedWebElement carTyp : carTypes) {
-			if (carTyp.getText().equalsIgnoreCase(carType)) {
-				click(carTyp);
-				for (ExtendedWebElement widthTires : widthsTires) {
-					select(widthTires, width);
-				}
-				for (ExtendedWebElement heightTires : heightsTires) {
-					select(heightTires, height);
-				}
-				for (ExtendedWebElement diameterTires : diametersTires) {
-					select(diameterTires, diameter);
-				}
-				for (ExtendedWebElement typ : types) {
-					if (typ.getText().equalsIgnoreCase(type)) {
-						click(typ);
-					}
-				}
-				click(searchButton);
-			}
+	// @FindBy(linkText = "Летние")
 
+	public TiresCatalogPage selectTires(String carType) {
+		if (car.getText().equalsIgnoreCase(carType)) {
+			click(car);
 		}
-
+		click(search);
 		return new TiresCatalogPage(driver);
 	}
 

@@ -5,6 +5,7 @@
 	data-provider-thread-count="1" annotations="JDK">
 
 	<test name="Tire Test">
+	<parameter name="{ds_custom_provider}" value="true" />
 		<classes>
 			<class name="com.qaprosoft.automation.tests.TireTest">
 				<methods>
