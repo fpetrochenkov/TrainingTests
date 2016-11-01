@@ -13,9 +13,7 @@
 	</resultMap>
 
 	<select id="getAllCarTires" resultMap="CarTireResultMap">
-		select name, diameter,
-		width, height, type, price, car_type from tires
-		inner join car_type where car_type_id = 1
+		select * from tires
 	</select>
 
 	<insert id="insertCarTire" parameterType="CarTire">
