@@ -12,20 +12,26 @@
 		<result column="type" property="type" />
 	</resultMap>
 
-	<select id="getAllTyreTires" resultMap="TyreTireResultMap">
-		select * from tires inner
-		join car_type on car_type.id = tires.car_type_id where car_type.id = 2
+	<select id="getAllTyreTires" resultMap="TyreTireResultMap"
+		resultType="TyreTire">
+		select name, diameter, width, height, type, price from
+		tires
+		inner join car_type on car_type.id = tires.car_type_id
+		where
+		car_type_id = 2
 	</select>
 
 	<insert id="insertTyreTire" parameterType="TyreTire">
-		INSERT IGNORE INTO tires
+		INSERT IGNORE INTO
+		tires
 		(name, price, diameter,
-		width, height, type) VALUES
-		(#{name}, #{price}, #{diameter}, #{width}, #{height}, #{type})
+		width, height, type, car_type_id) VALUES
+		(#{name}, #{price}, #{diameter}, #{width}, #{height}, #{type}, 2)
 	</insert>
-	
+
 	<insert id="insertCarType">
-	INSERT IGNORE INTO car_type (car_type) VALUES (#{car_type})
+		INSERT IGNORE INTO car_type (id, car_type) VALUES (2,
+		#{car_type})
 	</insert>
 
 </mapper>

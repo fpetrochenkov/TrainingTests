@@ -12,7 +12,7 @@
 	</properties>
 
 	<typeAliases>
-		<typeAlias alias="CarTire" type="com.qaprosoft.models.CarTire" />
+		<typeAlias alias="CarTire" type="com.qaprosoft.models.CarTire"/>
 		<typeAlias alias="TyreTire" type="com.qaprosoft.models.TyreTire" />
 		<typeAlias alias="OffRoadTire" type="com.qaprosoft.models.OffRoadTire" />
 		<typeAlias alias="FreightTire" type="com.qaprosoft.models.FreightTire" />
@@ -31,8 +31,7 @@
 	</environments>
 
 	<mappers>
-		<mapper resource="mybatis/mappers/CarTire_Mapper.xml" />
-	
+		<mapper resource="mybatis/mappers/CarTire_Mapper.xml" />	
 	</mappers>
 
 </configuration>

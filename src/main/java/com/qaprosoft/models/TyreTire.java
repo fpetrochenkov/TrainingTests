@@ -1,6 +1,6 @@
 package com.qaprosoft.models;
 
-public abstract class TyreTire extends Tire {
+public  class TyreTire extends Tire {
 	
 	public TyreTire () {}
 

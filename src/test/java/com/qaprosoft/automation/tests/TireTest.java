@@ -1,7 +1,9 @@
 package com.qaprosoft.automation.tests;
 
-import org.testng.Assert;
-import org.testng.ITestContext;
+import java.util.ArrayList;
+import java.util.List;
+
+import  org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import com.qaprosoft.carina.core.foundation.UITest;
@@ -17,54 +19,57 @@ import com.qaprosoft.services.TireService;
 
 public class TireTest extends UITest {
 
-	// @Test(dataProvider = "DataProvider")
-	// @XlsDataSourceParameters(path = "xls/tires.xlsx", sheet = "tires", dsUid
-	// = "TUID", dsArgs = "carType, width, height, diameter, type")
-	// public void testTires(String carType, String width, String height, String
-	// diameter, String type) {
-	// HomePage homePage = new HomePage(getDriver());
-	// homePage.open();
-	// Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened!");
-	// TireModelPage tireModelPage =
-	// homePage.getNavigationMenu().openTireModelPage();
-	// TiresCatalogPage tireCatalogPage =
-	// tireModelPage.getTabsFiller().selectTires(carType);
-	// tireCatalogPage.fillTire(diameter, type, width, height);
-	// InitialSystemService initialSystem = new InitialSystemService();
-	// initialSystem.fillTires();
-	// }
+//	 @Test(dataProvider = "DataProvider")
+//	 @XlsDataSourceParameters(path = "xls/tires.xlsx", sheet = "tires", dsUid
+//	 = "TUID", dsArgs = "carType, width, height, diameter, type")
+//	 public void testTires(String carType, String width, String height, String
+//	 diameter, String type) {
+//	 HomePage homePage = new HomePage(getDriver());
+//	 homePage.open();
+//	 Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened!");
+//	 TireModelPage tireModelPage =
+//	 homePage.getNavigationMenu().openTireModelPage();
+//	 TiresCatalogPage tireCatalogPage =
+//	 tireModelPage.getTabsFiller().selectTires(carType);
+//	 tireCatalogPage.fillTire(diameter, type, width, height);
+//	 InitialSystemService initialSystem = new InitialSystemService();
+//	 initialSystem.fillTires();
+//	 }
 
 	@Test(dataProvider = "createValidTestData")
 	@MethodOwner(owner = "fpetrochenkov")
-	@XlsDataSourceParameters(path = "xls/tires.xlsx", sheet = "tires", dsUid = "TUID", dsArgs = "carType, width, height, diameter, type")
-	public void testValidTires(String TUID, CarTire cartire, String carType, String width, String height,
-			String diameter, String type) {
-		CarTireDaoImpl carDao = new CarTireDaoImpl();
-		// Open AV.BY home page and verify page is opened
+	public void testValidTires(String TUID, CarTire cartire) {
+		//Open AV.BY home page and verify page is opened
+		List<CarTire> list = new ArrayList<>();
 		HomePage homePage = new HomePage(getDriver());
 		homePage.open();
-		Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened!");
-		TireModelPage tireModelPage = homePage.getNavigationMenu().openTireModelPage();
+		Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened!");	
+		TireModelPage tireModelPage = homePage.getNavigationMenu().openTireModelPage();		
 		TiresCatalogPage tireCatalogPage = tireModelPage.getTabsFiller().selectTires("Легковые");
-		tireCatalogPage.fillTire(diameter, type, width, height);
+		tireCatalogPage.fillTire(cartire.getDiameter().substring(1) + "\"", cartire.getType(), cartire.getWidth(), cartire.getHeight());
 		TireService service = new TireService();
-		Object[][] exp = new Object[carDao.getAllCarTires().size()][];
-		for (int i = 0; i < carDao.getAllCarTires().size(); i++) {
-			exp[i] = new Object[] { "TUID: " + String.format("%05d", i + 1), service.fillList().get(i) };
-		}
-		for (int i = 0; i < createValidTestData().length; i++) {
-			for (int j = 0; j < exp.length; j++) {
-				Assert.assertEquals(createValidTestData()[i], exp[j], "There is no such element!");
+		list.addAll(service.fillList());
+		for(CarTire tire: list) {
+			if(tire.getName().equals(cartire.getName())) {
+			Assert.assertEquals(tire.getName(), cartire.getName(), "The name is not match!");
+			Assert.assertEquals(tire.getPrice(), cartire.getPrice(), "The price is not match!");
+			Assert.assertEquals(tire.getDiameter(), cartire.getDiameter(), "The diameter is not match");
+			Assert.assertEquals(tire.getType(), cartire.getType(), "Type is not match!");
+			Assert.assertEquals(tire.getWidth(), cartire.getWidth(), "Width is not match!");
+			Assert.assertEquals(tire.getHeight(), cartire.getHeight(), "Height is not match!");
 			}
-		}
+		}		
 	}
 
 	@DataProvider(name = "createValidTestData")
 	public Object[][] createValidTestData() {
+		List<CarTire> carTires = new ArrayList<>();
 		CarTireDaoImpl carDao = new CarTireDaoImpl();
-		Object[][] res = new Object[carDao.getAllCarTires().size()][];
-		for (int i = 0; i < carDao.getAllCarTires().size(); i++) {
-			res[i] = new Object[] { "TUID: " + String.format("%05d", i + 1), carDao.getAllCarTires().get(i) };
+		int size = carDao.getAllCarTires().size();
+		carTires.addAll(carDao.getAllCarTires());
+		Object[][] res = new Object[size][2];
+		for (int i = 0; i < size; i++) {
+			res[i] = new Object[] { "TUID: " + String.format("%05d", i + 1), carTires.get(i) };
 		}
 		return res;
 	}
