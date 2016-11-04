@@ -36,7 +36,7 @@ public class FreightTireDaoImpl implements IFreightTireDao{
 	public void insertCarType(String carType) {
 		SqlSession session = SessionFactory.getInstance().getSqlSessionFactory().openSession();
 		try {
-			session.insert("mappers.insertCarType", carType);
+			session.insert("mappers.insertFreightType", carType);
 			session.commit();
 		} finally {
 			session.close();

@@ -29,7 +29,7 @@
 		(#{name}, #{price}, #{diameter}, #{width}, #{height}, #{type}, 3)
 	</insert>
 
-	<insert id="insertCarType">
+	<insert id="insertOffRoadType">
 		INSERT IGNORE INTO car_type (id, car_type) VALUES (3,
 		#{car_type})
 	</insert>

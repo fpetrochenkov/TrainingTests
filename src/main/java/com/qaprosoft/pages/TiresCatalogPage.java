@@ -29,11 +29,7 @@ public class TiresCatalogPage extends AbstractPage {
 	private List<ExtendedWebElement> tireWidthes;
 	
 	@FindBy(xpath = "//div[@class='b-subnav']//li/a")
-	private List<ExtendedWebElement> tireHeights;
-	
-	
-	
-	
+	private List<ExtendedWebElement> tireHeights;	
 	
 	@FindBy(xpath = "/html/body/div[3]/div[1]/main/div/div[1]/div[1]/div/div/ul/li[2]/a/span")
 	private ExtendedWebElement carType;
@@ -67,7 +63,7 @@ public class TiresCatalogPage extends AbstractPage {
 	public void fillTire(String diameter, String type, String width, String height) {
 		for(ExtendedWebElement tireDiameter: tireDiameters) {
 			if(tireDiameter.getText().equalsIgnoreCase(diameter)) {	
-				tireDiameter.click();
+				click(tireDiameter);
 			}
 		}
 		for(ExtendedWebElement tireType: tireTypes) {

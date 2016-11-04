@@ -17,37 +17,52 @@ public class TabsFiller extends AbstractUIObject {
 		super(driver, searchContext);
 	}
 
-	@FindBy(xpath = ".//dt[@class='tabsfilter-type js-tabsfilter-type tabsfilter-item--active']")
+	@FindBy(xpath = "/html/body/div[3]/div[1]/main/div[2]/div[1]/div/div[1]/div/div[1]/a")
 	private ExtendedWebElement car;
 
-	@FindBy(xpath = ".//dt[@class='tabsfilter-type js-tabsfilter-type'][contains(text(),'Легкогрузовые')]")
+	@FindBy(xpath = "/html/body/div[3]/div[1]/main/div[2]/div[1]/div/div[1]/div/div[2]/a")
 	private ExtendedWebElement tyre;
 
-	@FindBy(xpath = ".//dt[@class='tabsfilter-type js-tabsfilter-type'][contains(text(),'Внедорожные')]")
+	@FindBy(xpath = "/html/body/div[3]/div[1]/main/div[2]/div[1]/div/div[1]/div/div[3]/a")
 	private ExtendedWebElement offRoad;
 
-	@FindBy(xpath = ".//dt[@class='tabsfilter-type js-tabsfilter-type'][contains(text(),'Грузовые')]")
+	@FindBy(xpath = "/html/body/div[3]/div[1]/main/div[2]/div[1]/div/div[1]/div/div[4]/a")
 	private ExtendedWebElement freight;
-
-	// @FindBy(xpath = "//*[@id='tires-car-filter-form']/div/div[1]/select")
-	// private ExtendedWebElement width;
-
-	// @FindBy(linkText = "Высота")
-	// private ExtendedWebElement height;
-	//
-	// @FindBy(linkText = "Диаметр")
-	// private ExtendedWebElement diameter;
 
 	@FindBy(xpath = "//button[@class='button button-primary button-block js-submit-car-filter']")
 	private ExtendedWebElement search;
-
-	// @FindBy(linkText = "Летние")
-
+	
+	@FindBy(xpath = "//h4[@class='tyre-catalog-title']")
+	private List<ExtendedWebElement> carTypes;
+	
 	public TiresCatalogPage selectTires(String carType) {
-		if (car.getText().equalsIgnoreCase(carType)) {
-			click(car);
+//		if (car.getText().equalsIgnoreCase(carType)) {
+//			click(car);
+//		}
+//		if(tyre.getText().equalsIgnoreCase(carType)) {
+//			click(tyre);
+//		}
+//		if(offRoad.getText().equalsIgnoreCase(carType)) {
+//			click(offRoad);			
+//		}
+//		if(freight.getText().equalsIgnoreCase(carType)) {
+//			click(freight);
+//		}
+		
+		for(ExtendedWebElement cartype: carTypes) {
+			if(cartype.getText().equalsIgnoreCase(carType) ) {
+				click(cartype);
+			}
+			if(cartype.getText().equalsIgnoreCase(carType) ) {
+				click(cartype);
+			}
+			if(cartype.getText().equalsIgnoreCase(carType) ) {
+				click(cartype);
+			}
+			if(cartype.getText().equalsIgnoreCase(carType)) {
+				click(cartype);
+			}
 		}
-		click(search);
 		return new TiresCatalogPage(driver);
 	}
 

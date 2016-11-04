@@ -38,7 +38,7 @@ public class TyreTireDaoImpl implements ITyreTireDao{
 	public void insertCarType(String carType) {
 		SqlSession session = SessionFactory.getInstance().getSqlSessionFactory().openSession();
 		try {
-			session.insert("mappers.insertCarType", carType);
+			session.insert("mappers.insertTyreType", carType);
 			session.commit();
 		} finally {
 			session.close();

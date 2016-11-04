@@ -7,6 +7,5 @@ public  class OffRoadTire extends Tire {
 	public OffRoadTire(String name, String price, String diameter, String width, String height, String type) {
 		super(name, price, diameter, width, height, type);
 	}
-
 	
 }

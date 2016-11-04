@@ -9,36 +9,35 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
 public class SessionFactory {
-	
-private static final Logger LOG = LogManager.getRootLogger();
-	
+
+	private static final Logger LOG = LogManager.getRootLogger();
+
 	private static SessionFactory sessionFactory;
 	private SqlSessionFactory sqlSessionFactory;
-	
-	private SessionFactory(){
+
+	private SessionFactory() {
 		String resource = "mybatis/config.xml";
 		InputStream inputStream;
 		try {
 			inputStream = Resources.getResourceAsStream(resource);
 			sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-		} catch (IOException e) {	
+		} catch (IOException e) {
 			LOG.error("IOException", e);
 		}
 	}
 
 	public static SessionFactory getInstance() {
-		if (sessionFactory == null) {	
-			sessionFactory = new SessionFactory();    		
-            return sessionFactory;
-        } else {
-        	return sessionFactory;
-        }
+		if (sessionFactory == null) {
+			sessionFactory = new SessionFactory();
+			return sessionFactory;
+		} else {
+			return sessionFactory;
+		}
 	}
 
-	public SqlSessionFactory getSqlSessionFactory() {			
-		return sqlSessionFactory;	
+	public SqlSessionFactory getSqlSessionFactory() {
+		return sqlSessionFactory;
 	}
 
 }

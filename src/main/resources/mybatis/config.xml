@@ -32,6 +32,9 @@
 
 	<mappers>
 		<mapper resource="mybatis/mappers/CarTire_Mapper.xml" />	
+		<mapper resource="mybatis/mappers/TyreTire_Mapper.xml" />
+		<mapper resource="mybatis/mappers/OffRoadTire_Mapper.xml" />
+		<mapper resource="mybatis/mappers/FreightTire_Mapper.xml" />
 	</mappers>
 
 </configuration>
