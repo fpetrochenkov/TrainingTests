@@ -50,7 +50,7 @@ public class TireTest extends UITest {
 	@Test(dataProvider = "createValidTestData")
 	@MethodOwner(owner = "fpetrochenkov")
 	public void testValidTires(String TUID, Tire cartire) {
-		String carType = "Внедорожные";
+		String carType = cartire.getCar_type();
 		List<Tire> list = new ArrayList<>();
 		HomePage homePage = new HomePage(getDriver());
 		homePage.open();

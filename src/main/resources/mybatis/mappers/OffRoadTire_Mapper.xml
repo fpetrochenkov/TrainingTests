@@ -10,6 +10,7 @@
 		<result column="width" property="width" />
 		<result column="height" property="height" />
 		<result column="type" property="type" />
+		<result column="car_type" property="car_type" />
 	</resultMap>
 
 	<select id="getAllOffRoadTires" resultMap="OffRoadTireResultMap"
