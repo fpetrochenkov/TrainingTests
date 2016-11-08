@@ -3,16 +3,16 @@ package com.qaprosoft.dao.mybatis;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
-import com.qaprosoft.dao.IOffRoadTireDao;
-import com.qaprosoft.models.OffRoadTire;
+import com.qaprosoft.dao.ITruckDao;
+import com.qaprosoft.models.Truck;
 
-public class OffRoadTireDaoImpl implements IOffRoadTireDao{
+public class TruckDaoImpl implements ITruckDao{
 
 	@Override
-	public void insertOffRoadTire(OffRoadTire offRoadTire) {
+	public void insertTruck(Truck truck) {
 		SqlSession session = SessionFactory.getInstance().getSqlSessionFactory().openSession();
 		try {
-			session.insert("mappers.insertOffRoadTire", offRoadTire);
+			session.insert("mappers.insertFreightTire", truck);
 			session.commit();
 		} finally {
 			session.close();
@@ -20,11 +20,11 @@ public class OffRoadTireDaoImpl implements IOffRoadTireDao{
 	}
 
 	@Override
-	public List<OffRoadTire> getAllOffRoadTires() {
-		List<OffRoadTire> list = new ArrayList<>();
+	public List<Truck> getAllTrucks() {
+		List<Truck> list = new ArrayList<>();
 		SqlSession session = SessionFactory.getInstance().getSqlSessionFactory().openSession();
 		try {
-			list = session.selectList("mappers.getAllOffRoadTires");
+			list = session.selectList("mappers.getAllFreightTires");
 			session.commit();
 		} finally {
 			session.close();
@@ -36,7 +36,7 @@ public class OffRoadTireDaoImpl implements IOffRoadTireDao{
 	public void insertCarType(String carType) {
 		SqlSession session = SessionFactory.getInstance().getSqlSessionFactory().openSession();
 		try {
-			session.insert("mappers.insertOffRoadType", carType);
+			session.insert("mappers.insertFreightType", carType);
 			session.commit();
 		} finally {
 			session.close();

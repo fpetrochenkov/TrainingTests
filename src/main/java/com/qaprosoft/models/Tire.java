@@ -8,17 +8,19 @@ public abstract class Tire {
 	private String width;
 	private String height;
 	private String type;
+	private String car_type;
 
 	public Tire() {
 	}	
 
-	public Tire(String name, String price, String diameter, String width, String height, String type) {
+	public Tire(String name, String price, String diameter, String width, String height, String type, String car_type) {
 		this.name = name;
 		this.price = price;
 		this.diameter = diameter;
 		this.width = width;
 		this.height = height;
 		this.type = type;
+		this.car_type = car_type;
 	}
 	
 	public String getDiameter() {
@@ -67,6 +69,14 @@ public abstract class Tire {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getCar_type() {
+		return car_type;
+	}
+
+	public void setCar_type(String car_type) {
+		this.car_type = car_type;
 	}
 
 }

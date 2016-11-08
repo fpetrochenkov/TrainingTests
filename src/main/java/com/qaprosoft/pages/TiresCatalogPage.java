@@ -7,6 +7,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
+import com.qaprosoft.dao.mybatis.CarDaoImpl;
+import com.qaprosoft.dao.mybatis.LightTruckDaoImpl;
+import com.qaprosoft.dao.mybatis.SuvDaoImpl;
+import com.qaprosoft.dao.mybatis.TruckDaoImpl;
+import com.qaprosoft.models.Car;
+import com.qaprosoft.models.LightTruck;
+import com.qaprosoft.models.Suv;
+import com.qaprosoft.models.Tire;
+import com.qaprosoft.models.Truck;
 
 public class TiresCatalogPage extends AbstractPage {
 	
@@ -31,20 +40,17 @@ public class TiresCatalogPage extends AbstractPage {
 	@FindBy(xpath = "//div[@class='b-subnav']//li/a")
 	private List<ExtendedWebElement> tireHeights;	
 	
-	@FindBy(xpath = "/html/body/div[3]/div[1]/main/div/div[1]/div[1]/div/div/ul/li[2]/a/span")
+	@FindBy(xpath = "//ul[@class='breadcrumbs-list js-breadcrumbs-list setanim']/li[2]//span")
 	private ExtendedWebElement carType;
 	
-	@FindBy(xpath = "/html/body/div[3]/div[1]/main/div/div[1]/div[1]/div/div/ul/li[3]/a/span")
+	@FindBy(xpath = "//ul[@class='breadcrumbs-list js-breadcrumbs-list setanim']/li[3]//span")
 	private ExtendedWebElement type;
 	
-	@FindBy(xpath = "/html/body/div[3]/div[1]/main/div/div[1]/div[1]/div/div/ul/li[4]/a/span")
+	@FindBy(xpath = "//ul[@class='breadcrumbs-list js-breadcrumbs-list setanim']/li[4]//span")
 	private ExtendedWebElement diameter;
 	
-	@FindBy(xpath = "/html/body/div[3]/div[1]/main/div/div[1]/div[1]/div/div/ul/li[5]/span")
-	private ExtendedWebElement width_height;
-	
-	
-	
+	@FindBy(xpath = "//ul[@class='breadcrumbs-list js-breadcrumbs-list setanim']/li[5]//span")
+	private ExtendedWebElement width_height;	
 	
 	public TiresCatalogPage(WebDriver driver) {
 		super(driver);
@@ -60,7 +66,7 @@ public class TiresCatalogPage extends AbstractPage {
 		}
 	}
 	
-	public void fillTire(String diameter, String type, String width, String height) {
+	public void fillCarAndLightTruckTire(String diameter, String type, String width, String height) {
 		for(ExtendedWebElement tireDiameter: tireDiameters) {
 			if(tireDiameter.getText().equalsIgnoreCase(diameter)) {	
 				click(tireDiameter);
@@ -83,6 +89,30 @@ public class TiresCatalogPage extends AbstractPage {
 			}
 		}
 	}
+	
+	public void fillTruckAndSuvTire(String diameter, String type, String width, String height) {		
+		for(ExtendedWebElement tireType: tireTypes) {
+			if(tireType.getText().equalsIgnoreCase(type)) {
+				click(tireType);
+			}
+		}		
+		for(ExtendedWebElement tireDiameter: tireDiameters) {
+			if(tireDiameter.getText().equalsIgnoreCase(diameter)) {	
+				click(tireDiameter);
+			}
+		}	
+		for(ExtendedWebElement tireWidth: tireWidthes) {
+			if(tireWidth.getText().equalsIgnoreCase(width)) {
+				click(tireWidth);
+			}
+		}
+		for(ExtendedWebElement tireHeight: tireHeights) {
+			if(tireHeight.getText().equalsIgnoreCase(height)) {
+				click(tireHeight);
+				break;
+			}
+		}
+	}	
 	
 	public List<String> getTireTitles() {
 		List<String> list = new ArrayList<>();

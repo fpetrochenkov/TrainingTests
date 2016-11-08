@@ -12,10 +12,10 @@
 	</properties>
 
 	<typeAliases>
-		<typeAlias alias="CarTire" type="com.qaprosoft.models.CarTire"/>
-		<typeAlias alias="TyreTire" type="com.qaprosoft.models.TyreTire" />
-		<typeAlias alias="OffRoadTire" type="com.qaprosoft.models.OffRoadTire" />
-		<typeAlias alias="FreightTire" type="com.qaprosoft.models.FreightTire" />
+		<typeAlias alias="Car" type="com.qaprosoft.models.Car"/>
+		<typeAlias alias="LightTruck" type="com.qaprosoft.models.LightTruck" />
+		<typeAlias alias="Suv" type="com.qaprosoft.models.Suv" />
+		<typeAlias alias="Truck" type="com.qaprosoft.models.Truck" />
 	</typeAliases>
 
 	<environments default="development">

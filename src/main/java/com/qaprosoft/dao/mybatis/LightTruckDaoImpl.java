@@ -2,19 +2,31 @@ package com.qaprosoft.dao.mybatis;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
-import com.qaprosoft.dao.ICarTireDao;
-import com.qaprosoft.models.CarTire;
 
-public class CarTireDaoImpl implements ICarTireDao{
+import com.qaprosoft.dao.ILightTruckDao;
+import com.qaprosoft.models.LightTruck;
 
+public class LightTruckDaoImpl implements ILightTruckDao{
 
 	@Override
-	public List<CarTire> getAllCarTires() {
-		List<CarTire> list = new ArrayList<>();
+	public void insertLightTruck(LightTruck lightTruck) {
 		SqlSession session = SessionFactory.getInstance().getSqlSessionFactory().openSession();
 		try {
-			list = session.selectList("mappers.getAllCarTires");
+			session.insert("mappers.insertTyreTire", lightTruck);
+			session.commit();
+		} finally {
+			session.close();
+		}
+	}
+
+	@Override
+	public List<LightTruck> getAllLightTrucks() {
+		List<LightTruck> list = new ArrayList<>();
+		SqlSession session = SessionFactory.getInstance().getSqlSessionFactory().openSession();
+		try {
+			list = session.selectList("mappers.getAllTyreTires");
 			session.commit();
 		} finally {
 			session.close();
@@ -23,25 +35,14 @@ public class CarTireDaoImpl implements ICarTireDao{
 	}
 
 	@Override
-	public void insertCarTire(CarTire carTire) {
-		SqlSession session = SessionFactory.getInstance().getSqlSessionFactory().openSession();
-		try {
-			session.insert("mappers.insertCarTire", carTire);
-			session.commit();
-		} finally {
-			session.close();
-		}
-	}
-
-	@Override
 	public void insertCarType(String carType) {
 		SqlSession session = SessionFactory.getInstance().getSqlSessionFactory().openSession();
 		try {
-			session.insert("mappers.insertCarType", carType);
+			session.insert("mappers.insertTyreType", carType);
 			session.commit();
 		} finally {
 			session.close();
-		}		
-	}	
+		}	
+	}
 
 }

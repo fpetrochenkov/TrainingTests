@@ -8,8 +8,9 @@
 	<parameter name="{ds_custom_provider}" value="true" />
 		<classes>
 			<class name="com.qaprosoft.automation.tests.TireTest">
-				<methods>
-					<include name="testTires" />
+				<methods>					
+					<include name="fillDB"/>
+					<include name="testValidTires" />
 				</methods>
 			</class>
 		</classes>

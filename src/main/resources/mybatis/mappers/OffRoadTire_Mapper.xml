@@ -3,7 +3,7 @@
 
 <mapper namespace="mappers">
 
-	<resultMap id="OffRoadTireResultMap" type="OffRoadTire">
+	<resultMap id="OffRoadTireResultMap" type="Suv">
 		<result column="name" property="name" />
 		<result column="price" property="price" />
 		<result column="diameter" property="diameter" />
@@ -13,20 +13,20 @@
 	</resultMap>
 
 	<select id="getAllOffRoadTires" resultMap="OffRoadTireResultMap"
-		resultType="OffRoadTire">
-		select name, diameter, width, height, type, price from
+		resultType="Suv">
+		select name, diameter, width, height, type, price, car_type from
 		tires
 		inner join car_type on car_type.id = tires.car_type_id
 		where
 		car_type_id = 3
 	</select>
 
-	<insert id="insertOffRoadTire" parameterType="OffRoadTire">
-		INSERT IGNORE INTO
+	<insert id="insertOffRoadTire" parameterType="Suv">
+		INSERT  INTO
 		tires
 		(name, price, diameter,
 		width, height, type, car_type_id) VALUES
-		(#{name}, #{price}, #{diameter}, #{width}, #{height}, #{type}, 3)
+		(#{name}, #{price}, #{diameter}, #{width}, #{height}, #{type}, (select car_type.id from car_type where car_type.id = 3))
 	</insert>
 
 	<insert id="insertOffRoadType">

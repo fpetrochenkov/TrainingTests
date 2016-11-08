@@ -4,74 +4,74 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.qaprosoft.carina.core.foundation.webdriver.DriverHelper;
-import com.qaprosoft.dao.mybatis.CarTireDaoImpl;
-import com.qaprosoft.dao.mybatis.FreightTireDaoImpl;
-import com.qaprosoft.dao.mybatis.OffRoadTireDaoImpl;
-import com.qaprosoft.dao.mybatis.TyreTireDaoImpl;
-import com.qaprosoft.models.CarTire;
-import com.qaprosoft.models.FreightTire;
-import com.qaprosoft.models.OffRoadTire;
-import com.qaprosoft.models.TyreTire;
+import com.qaprosoft.dao.mybatis.CarDaoImpl;
+import com.qaprosoft.dao.mybatis.LightTruckDaoImpl;
+import com.qaprosoft.dao.mybatis.SuvDaoImpl;
+import com.qaprosoft.dao.mybatis.TruckDaoImpl;
+import com.qaprosoft.models.Car;
+import com.qaprosoft.models.Truck;
+import com.qaprosoft.models.Suv;
+import com.qaprosoft.models.LightTruck;
 import com.qaprosoft.pages.TiresCatalogPage;
 
 public class InitialSystemService extends DriverHelper {
-	
+
 	TiresCatalogPage tireCatalog = new TiresCatalogPage(getDriver());
 
-	public void fillCarTires() {
+	public void fillCars() {
 		String carType = "Легковые";
-		List<CarTire> cartires = new ArrayList<>();
+		List<Car> cars = new ArrayList<>();
 		TireService service = new TireService();
-		cartires.addAll(service.fillCarTireList());
-		CarTireDaoImpl tireDao = new CarTireDaoImpl();
-		for(CarTire cartire: cartires) {
-			tireDao.insertCarTire(cartire);
-		}		
-		if(tireCatalog.getCarType().equalsIgnoreCase(carType)) {
-		tireDao.insertCarType(tireCatalog.getCarType());
+		cars.addAll(service.fillCarList());
+		CarDaoImpl tireDao = new CarDaoImpl();
+		if (tireCatalog.getCarType().equalsIgnoreCase(carType)) {
+			tireDao.insertCarType(tireCatalog.getCarType());
+		}
+		for (Car car : cars) {
+			tireDao.insertCar(car);
 		}
 	}
-	
-	public void fillTyreTires() {
+
+	public void fillLightTrucks() {
 		String carType = "Легкогрузовые";
-		List<TyreTire> tyretires = new ArrayList<>();
+		List<LightTruck> lightTrucks = new ArrayList<>();
 		TireService service = new TireService();
-		tyretires.addAll(service.fillTyreTireList());
-		TyreTireDaoImpl tireDao = new TyreTireDaoImpl();
-		for(TyreTire tyretire: tyretires) {
-			tireDao.insertTyreTire(tyretire);
-		}		
-		if(tireCatalog.getCarType().equalsIgnoreCase(carType)) {
-		tireDao.insertCarType(tireCatalog.getCarType());
+		lightTrucks.addAll(service.fillLightTruckList());
+		LightTruckDaoImpl tireDao = new LightTruckDaoImpl();
+		if (tireCatalog.getCarType().equalsIgnoreCase(carType)) {
+			tireDao.insertCarType(tireCatalog.getCarType());
 		}
+		for (LightTruck lightTruck : lightTrucks) {
+			tireDao.insertLightTruck(lightTruck);
+		}		
 	}
-	
-	public void fillOffRoadTires() {
+
+	public void fillSuves() {
 		String carType = "Внедорожные";
-		List<OffRoadTire> offRoadTires = new ArrayList<>();
+		List<Suv> suves = new ArrayList<>();
 		TireService service = new TireService();
-		offRoadTires.addAll(service.fillOffRoadTireList());
-		OffRoadTireDaoImpl tireDao = new OffRoadTireDaoImpl();
-		for(OffRoadTire offRoadTire: offRoadTires) {
-			tireDao.insertOffRoadTire(offRoadTire);
-		}		
-		if(tireCatalog.getCarType().equalsIgnoreCase(carType)) {
-		tireDao.insertCarType(tireCatalog.getCarType());
+		suves.addAll(service.fillSuvList());
+		SuvDaoImpl tireDao = new SuvDaoImpl();
+		if (tireCatalog.getCarType().equalsIgnoreCase(carType)) {
+			tireDao.insertCarType(tireCatalog.getCarType());
+		}
+		for (Suv suv : suves) {
+			tireDao.insertSuv(suv);
 		}
 	}
-	
-	public void fillFreightTires() {
+
+	public void fillTrucks() {
 		String carType = "Грузовые";
-		List<FreightTire> freightTires = new ArrayList<>();
+		List<Truck> trucks = new ArrayList<>();
 		TireService service = new TireService();
-		freightTires.addAll(service.fillFreightTireList());
-		FreightTireDaoImpl tireDao = new FreightTireDaoImpl();
-		for(FreightTire freightTire: freightTires) {
-			tireDao.insertFreightTire(freightTire);
-		}		
-		if(tireCatalog.getCarType().equalsIgnoreCase(carType)) {
-		tireDao.insertCarType(tireCatalog.getCarType());
+		trucks.addAll(service.fillTruckList());
+		TruckDaoImpl tireDao = new TruckDaoImpl();
+		if (tireCatalog.getCarType().equalsIgnoreCase(carType)) {
+			tireDao.insertCarType(tireCatalog.getCarType());
 		}
+		for (Truck truck : trucks) {
+			tireDao.insertTruck(truck);
+		}	
 	}
-	
+
 }
